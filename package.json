@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server",
-    "build": "rimraf dst && webpack -p",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
   },
   "sideEffects": false,
   "author": "",
@@ -88,6 +88,7 @@
   "dependencies": {
     "@apollo/client": "^3.0.0-beta.1",
     "@apollo/react-hooks": "^3.1.3",
+    "apollo-boost": "^0.4.4",
     "apollo-cache-inmemory": "^1.6.3",
     "apollo-link": "^1.2.13",
     "apollo-link-schema": "^1.2.4",
@@ -96,6 +97,8 @@
     "graphql": "^14.5.8",
     "graphql-tag": "^2.10.1",
     "graphql-tools": "^4.0.6",
+    "next": "^9.1.2",
+    "next-apollo": "^3.1.6",
     "react": "^16.11.0",
     "react-apollo": "^3.1.3",
     "react-dom": "^16.11.0",
