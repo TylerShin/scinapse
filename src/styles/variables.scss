@@ -1,0 +1,55 @@
+$main_blue0: #6096ff;
+$main_blue1: #3e7fff;
+$main_blue_light0: #81acff;
+$main_blue_light1: #ecf1fa;
+
+$gray30: #f8f9fb;
+$gray50: #f4f4f5;
+$gray100: #fafbfc;
+$gray200: #f1f3f6;
+$gray300: #e7eaef;
+$gray400: #d8dde7;
+$gray500: #bbc2d0;
+$gray600: #9aa3b5;
+$gray700: #7e8698;
+$gray800: #666d7c;
+
+$black0: #1e2a35;
+$black1: #34495e;
+
+$navy0: #133f7a;
+$purple0: #3e39ac;
+
+$red0: #e22319;
+$red1: #e24336;
+$green0: #48d2a0;
+$yellow0: #ffcf48;
+
+// font-family
+$fallback: -apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+// Transition Variables
+$button-hover-transition: ease-in-out 0.2s;
+
+// helpers
+%one-line-overflow-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+@mixin one-line-elipsis-truncate($width) {
+  width: $width;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+$container-width: 1080px;
+
+// for javascript
+:export {
+  gray500: $gray500;
+  gray800: $gray800;
+  mainBlue1: $main_blue1;
+  black1: $black1;
+}
