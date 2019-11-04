@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { gql } from '@apollo/client';
 import { useQuery } from "@apollo/react-hooks";
 import { NextPage } from 'next';
-import { withApollo } from '../helpers/next-apollo';
+import { withApollo } from 'helpers/next-apollo';
 
 const GET_PAPER_ITEM = gql`
   query getPaper($id: String!) {
@@ -14,9 +14,8 @@ const GET_PAPER_ITEM = gql`
   }
 `;
 
-const Home: NextPage<{}, null> = () => {
+const PaperShow: NextPage<{}, null> = () => {
   const { data, loading, error } = useQuery(GET_PAPER_ITEM, { variables: { id: '2559394418' } });
-
   return (
     <div>
       <h1>{data && data.getPaper && data.getPaper.title}</h1>
@@ -25,8 +24,9 @@ const Home: NextPage<{}, null> = () => {
   );
 };
 
-Home.getInitialProps = async () => {
+PaperShow.getInitialProps = async () => {
   return null;
 };
 
-export default withApollo(Home);
+export default withApollo(PaperShow);
+

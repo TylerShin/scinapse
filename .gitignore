@@ -6,5 +6,4 @@ node_modules
 .serverless
 .serverless_nextjs
 .next
-.next/**/*
 .DS_Store
