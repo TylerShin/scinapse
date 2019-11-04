@@ -1,0 +1,4 @@
+org: tylershin
+app: neo-scinapse
+neoScinapse:
+  component: serverless-next.js

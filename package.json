@@ -73,6 +73,8 @@
     "rimraf": "^3.0.0",
     "sass-loader": "^8.0.0",
     "sass-resources-loader": "^2.0.1",
+    "serverless": "^1.56.1",
+    "serverless-next.js": "^1.4.3",
     "style-loader": "^1.0.0",
     "svg-sprite-loader": "^4.1.6",
     "svg-transform-loader": "^2.0.8",

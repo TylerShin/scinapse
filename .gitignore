@@ -2,3 +2,9 @@
 dst
 node_modules
 .idea
+.env
+.serverless
+.serverless_nextjs
+.next
+.next/**/*
+.DS_Store
