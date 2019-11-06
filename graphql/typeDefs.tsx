@@ -1,4 +1,7 @@
-import { gql } from 'apollo-boost';
+import { gql } from '@apollo/client';
+import { LoginResponse } from './schema/user';
+import { MemberDefs } from './schema/member';
+import { EMAIL_LOG_IN } from './mutations/auth';
 
 const typeDefs = gql`
   type BestPdf {
@@ -83,9 +86,14 @@ const typeDefs = gql`
     journal: Journal
   }
 
+  ${LoginResponse}
+  ${MemberDefs}
+
   type Query {
-    getPaper(id: String!): Paper
+    GetPaper(id: String!): Paper
   }
+
+  ${EMAIL_LOG_IN}
 `;
 
 export default typeDefs;
