@@ -2,8 +2,7 @@ import React from 'react';
 import Head from 'next/head';
 import { NextPage, NextPageContext } from 'next';
 import { ApolloProvider } from '@apollo/react-hooks';
-import { ApolloClient } from '@apollo/client';
-import { InMemoryCache } from 'apollo-cache-inmemory';
+import { ApolloClient, InMemoryCache } from '@apollo/client';
 import { makeExecutableSchema } from 'graphql-tools';
 import typeDefs from '../graphql/typeDefs';
 import resolvers from '../graphql/resolvers';
@@ -126,8 +125,8 @@ function createApolloClient(initialState = {}) {
   });
 
   return new ApolloClient({
-    ssrMode: typeof window === 'undefined', // Disables forceFetch on the server (so queries are only run once)
-    link: new SchemaLink({ schema }),
+    ssrMode: typeof window === 'undefined',
+    link: new SchemaLink({ schema }) as any,
     cache: new InMemoryCache().restore(initialState),
-  } as any);
+  });
 }
