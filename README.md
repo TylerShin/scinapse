@@ -1,5 +1,7 @@
 # Neo-Scinapse
-A scinapse web client V2
+A scinapse web client V2 ([DEMO](https://d235qdnm7988kg.cloudfront.net/))
+
+apollo client + nextJS(SSR) + Serverless)
 
 ## Specification
 - GraphQL(Apollo client)
