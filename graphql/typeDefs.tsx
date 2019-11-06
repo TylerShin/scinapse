@@ -15,21 +15,21 @@ const typeDefs = gql`
     caption: String
     path: String
   }
-  
+
   type Urls {
     paperid: String
     id: String
     url: String
     is_pdf: Boolean
   }
-  
+
   type FosList {
     paperid: String
     id: String
     fos: String
     name: String
   }
-  
+
   type Authors {
     paperid: String
     id: String
@@ -40,7 +40,7 @@ const typeDefs = gql`
     hindex: Int
     is_layered: Boolean
   }
-  
+
   type Journal {
     id: String
     title: String
@@ -53,9 +53,9 @@ const typeDefs = gql`
     fosList: String
     title_abbrev: String
   }
-  
+
   type Paper {
-    id: String
+    id: String!
     title: String
     year: Int
     lang: String
@@ -82,9 +82,9 @@ const typeDefs = gql`
     authors: [Authors]
     journal: Journal
   }
-  
+
   type Query {
-      getPaper(id: String!): Paper
+    getPaper(id: String!): Paper
   }
 `;
 
