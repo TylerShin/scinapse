@@ -1,6 +1,6 @@
 import { gql } from '@apollo/client';
 
-export const MemberDefs = gql`
+export const Member = gql`
   type Member {
     id: Int
     email: String
