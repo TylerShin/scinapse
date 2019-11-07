@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client';
+import { gql } from 'apollo-boost';
 
 export const LoginResponse = gql`
   type LoginResponse {

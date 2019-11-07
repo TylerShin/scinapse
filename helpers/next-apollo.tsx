@@ -1,12 +1,12 @@
 import React from 'react';
 import Head from 'next/head';
 import { NextPage, NextPageContext } from 'next';
+import { ApolloClient, InMemoryCache } from 'apollo-boost';
 import { ApolloProvider } from '@apollo/react-hooks';
-import { ApolloClient, InMemoryCache } from '@apollo/client';
 import { makeExecutableSchema } from 'graphql-tools';
+import { SchemaLink } from 'apollo-link-schema';
 import typeDefs from '../graphql/typeDefs';
 import resolvers from '../graphql/resolvers';
-import { SchemaLink } from 'apollo-link-schema';
 
 type ApolloCtx = NextPageContext & { apolloClient: ApolloClient<InMemoryCache> };
 
@@ -55,10 +55,8 @@ export function withApollo(PageComponent: NextPage<any, any>, { ssr = true } = {
           return pageProps;
         }
 
-        // Only if ssr is enabled
         if (ssr) {
           try {
-            // Run all GraphQL queries
             const { getDataFromTree } = await import('@apollo/react-ssr');
             await getDataFromTree(
               <AppTree
@@ -69,19 +67,11 @@ export function withApollo(PageComponent: NextPage<any, any>, { ssr = true } = {
               />
             );
           } catch (error) {
-            // Prevent Apollo Client GraphQL errors from crashing SSR.
-            // Handle them in components via the data.error prop:
-            // https://www.apollographql.com/docs/react/api/react-apollo.html#graphql-query-data-error
             console.error('Error while running `getDataFromTree`', error);
           }
-
-          // getDataFromTree does not call componentWillUnmount
-          // head side effect therefore need to be cleared manually
           Head.rewind();
         }
       }
-
-      // Extract query data from the Apollo store
       const apolloState = apolloClient.cache.extract();
 
       return {
@@ -114,10 +104,6 @@ function initApolloClient(initialState?: any) {
   return apolloClient;
 }
 
-/**
- * Creates and configures the ApolloClient
- * @param  {Object} [initialState={}]
- */
 function createApolloClient(initialState = {}) {
   const schema = makeExecutableSchema({
     typeDefs,
@@ -126,7 +112,7 @@ function createApolloClient(initialState = {}) {
 
   return new ApolloClient({
     ssrMode: typeof window === 'undefined',
-    link: new SchemaLink({ schema }) as any,
+    link: new SchemaLink({ schema }),
     cache: new InMemoryCache().restore(initialState),
   });
 }

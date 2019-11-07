@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Resolvers } from '@apollo/client';
+import { Resolvers } from 'apollo-boost';
 const API_URL = 'https://api.scinapse.io/';
 
 const getPaper = (id: string | number) => {
