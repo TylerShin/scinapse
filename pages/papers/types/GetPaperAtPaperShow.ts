@@ -8,7 +8,7 @@
 
 export interface GetPaperAtPaperShow_getPaper {
   __typename: "Paper";
-  id: string | null;
+  id: string;
   title: string | null;
   abstract: string | null;
 }

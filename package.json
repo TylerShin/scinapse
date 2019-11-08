@@ -7,7 +7,7 @@
     "dev": "next",
     "build": "next build",
     "start:graphql": "ts-node --project server/tsconfig.json server/apolloServer.ts",
-    "generate:graphql_types": "apollo schema:download --endpoint=http://localhost:4000 && apollo client:codegen --target=typescript types",
+    "generate:graphql_types": "apollo schema:download --endpoint=http://localhost:4000 schema.json && apollo client:codegen --target=typescript --localSchemaFile=schema.json types",
     "start": "next start"
   },
   "sideEffects": false,
@@ -75,7 +75,7 @@
     "@apollo/react-hooks": "^3.1.3",
     "@apollo/react-ssr": "^3.1.3",
     "@emotion/core": "^10.0.22",
-    "@pluto_network/pluto-design-elements": "0.0.17",
+    "@pluto_network/pluto-design-elements": "0.0.20",
     "@zeit/next-sass": "^1.0.1",
     "apollo-boost": "^0.4.4",
     "apollo-cache-inmemory": "^1.6.3",

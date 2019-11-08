@@ -1,5 +1,5 @@
 import { gql } from 'apollo-boost';
-import { LoginResponse } from './schema/user';
+import { User } from './schema/user';
 import { Member } from './schema/member';
 
 const typeDefs = gql`
@@ -85,7 +85,7 @@ const typeDefs = gql`
     journal: Journal
   }
 
-  ${LoginResponse}
+  ${User}
   ${Member}
 
   type Query {

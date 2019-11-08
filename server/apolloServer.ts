@@ -1,7 +1,9 @@
-import { ApolloServer } from 'apollo-server';
+import { ApolloServer, makeExecutableSchema } from 'apollo-server';
 import typeDefs from '../graphql/typeDefs';
+import resolvers from '../graphql/resolvers';
 
-const server = new ApolloServer({ typeDefs });
+const schema = makeExecutableSchema({ typeDefs, resolvers });
+const server = new ApolloServer({ schema });
 
 server.listen().then(({}) => {
   console.log(`🚀 Server ready`);
