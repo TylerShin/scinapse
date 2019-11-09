@@ -1,7 +1,7 @@
 import { gql } from 'apollo-boost';
 
 export const User = gql`
-  type LoginResponse {
+  type CurrentUser {
     loggedIn: Boolean
     oauthLoggedIn: Boolean
     token: String
@@ -9,6 +9,6 @@ export const User = gql`
   }
 
   type Mutation {
-    logInWithEmail(email: String!, password: String!): LoginResponse
+    logInWithEmail(email: String!, password: String!): CurrentUser
   }
 `;

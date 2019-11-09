@@ -3,7 +3,9 @@ import { gql } from 'apollo-boost';
 import { Formik, Form, Field } from 'formik';
 import FormikInput from 'components/formikInput/formikInput';
 import { Button } from '@pluto_network/pluto-design-elements';
-import { useMutation } from '@apollo/react-hooks';
+import { useMutation, useQuery } from '@apollo/react-hooks';
+import { GetCurrentUser } from './types/GetCurrentUser';
+import { LogInWithEmail } from './types/LogInWithEmail';
 
 interface FormValues {
   email: string;
@@ -15,6 +17,19 @@ const LOG_IN_WITH_EMAIL = gql`
     logInWithEmail(email: $email, password: $password) {
       loggedIn
       member {
+        id
+        email
+      }
+    }
+  }
+`;
+
+const CURRENT_USER = gql`
+  query GetCurrentUser {
+    currentUser {
+      loggedIn
+      member {
+        id
         email
       }
     }
@@ -22,11 +37,19 @@ const LOG_IN_WITH_EMAIL = gql`
 `;
 
 const AuthForm = () => {
-  const [logIn, { loading, error }] = useMutation(LOG_IN_WITH_EMAIL, {
-    onCompleted: res => {
-      console.log(res);
+  const [logIn, { loading, error }] = useMutation<LogInWithEmail>(LOG_IN_WITH_EMAIL, {
+    update(cache, { data }) {
+      console.log(data);
+      cache.writeQuery({
+        query: CURRENT_USER,
+        data: { currentUser: data?.logInWithEmail },
+      });
     },
   });
+
+  const { data: user } = useQuery<GetCurrentUser>(CURRENT_USER);
+
+  console.log(user);
 
   return (
     <Formik<FormValues>

@@ -7,7 +7,8 @@
     "dev": "next",
     "build": "next build",
     "start:graphql": "ts-node --project server/tsconfig.json server/apolloServer.ts",
-    "generate:graphql_types": "apollo schema:download --endpoint=http://localhost:4000 schema.json && apollo client:codegen --target=typescript --localSchemaFile=schema.json types",
+    "download:schema": "rm schema.json && apollo schema:download --endpoint=http://localhost:4000 schema.json",
+    "generate:graphql_types": "apollo client:codegen --target=typescript --localSchemaFile=schema.json types",
     "start": "next start"
   },
   "sideEffects": false,

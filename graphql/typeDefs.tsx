@@ -90,6 +90,7 @@ const typeDefs = gql`
 
   type Query {
     getPaper(id: String!): Paper
+    currentUser: CurrentUser
   }
 `;
 

@@ -10,11 +10,19 @@ const logInWithEmail = (email: string, password: string) => {
   return axios.post(`${API_URL}auth/login`, { email, password });
 };
 
+const getCurrentUser = () => {
+  return axios.get(`${API_URL}auth/login`, { withCredentials: true });
+};
+
 const resolvers: Resolvers = {
   Query: {
     getPaper: async (_, { id }, _context, __) => {
       const res = await getPaper(id);
       return res.data;
+    },
+    currentUser: async (_, __, ___, ____) => {
+      const user = await getCurrentUser();
+      return user;
     },
   },
   Mutation: {
