@@ -6,6 +6,7 @@ import { Button } from '@pluto_network/pluto-design-elements';
 import { useMutation, useQuery } from '@apollo/react-hooks';
 import { GetCurrentUser } from './types/GetCurrentUser';
 import { LogInWithEmail } from './types/LogInWithEmail';
+import { CURRENT_USER } from 'graphql-client/user';
 
 interface FormValues {
   email: string;
@@ -15,18 +16,6 @@ interface FormValues {
 const LOG_IN_WITH_EMAIL = gql`
   mutation LogInWithEmail($email: String!, $password: String!) {
     logInWithEmail(email: $email, password: $password) {
-      loggedIn
-      member {
-        id
-        email
-      }
-    }
-  }
-`;
-
-const CURRENT_USER = gql`
-  query GetCurrentUser {
-    currentUser {
       loggedIn
       member {
         id
@@ -49,7 +38,7 @@ const AuthForm = () => {
 
   const { data: user } = useQuery<GetCurrentUser>(CURRENT_USER);
 
-  console.log(user);
+  console.log('user in form', user);
 
   return (
     <Formik<FormValues>
