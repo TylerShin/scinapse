@@ -8,11 +8,12 @@
 
 export interface LogInWithEmail_logInWithEmail_member {
   __typename: "Member";
+  id: number | null;
   email: string | null;
 }
 
 export interface LogInWithEmail_logInWithEmail {
-  __typename: "LoginResponse";
+  __typename: "CurrentUser";
   loggedIn: boolean | null;
   member: LogInWithEmail_logInWithEmail_member | null;
 }

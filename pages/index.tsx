@@ -1,16 +1,13 @@
 import React from 'react';
 import { NextPage } from 'next';
 import { withApollo } from '../helpers/next-apollo';
-import AuthForm from 'components/authForm/authForm';
-import Header from 'components/header/header';
+import Layout from 'components/layout/layout';
 
 const Home: NextPage<{}, null> = () => {
   return (
-    <div>
-      <Header />
-      <h1>Hello Scinapse</h1>
-      <AuthForm />
-    </div>
+    <Layout>
+      <h1>Scinapse</h1>
+    </Layout>
   );
 };
 

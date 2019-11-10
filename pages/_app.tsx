@@ -1,6 +1,5 @@
 import React from 'react';
 import App from 'next/app';
-
 import './root.scss';
 
 class NeoScinapse extends App {
