@@ -34,10 +34,3 @@ export const parseFilter = (filterStr?: string | null): Filter => {
   console.log(filters);
   return filters;
 };
-
-// console.log(parseFilter('year=:,fos=,journal='));
-// console.log(parseFilter('year=2017:2019,fos=33923547|154945302|119857082,journal=2597173376|2597365278'));
-// console.log(parseFilter('year=:, fos='));
-// console.log(parseFilter(undefined));
-// console.log(parseFilter(null));
-// console.log(parseFilter(''));
