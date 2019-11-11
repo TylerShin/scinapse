@@ -2,11 +2,11 @@ import { gql } from 'apollo-boost';
 
 export const Member = gql`
   type Member {
-    id: Int
+    id: String
     email: String
     email_verified: Boolean
     profile_image_url: String
-    author_id: Int
+    author_id: String
     affiliation_id: String
     affiliation_name: String
     profile_link: String
