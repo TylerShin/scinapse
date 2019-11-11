@@ -31,6 +31,5 @@ export const parseFilter = (filterStr?: string | null): Filter => {
     return accm;
   }, {} as Filter);
 
-  console.log(filters);
   return filters;
 };
