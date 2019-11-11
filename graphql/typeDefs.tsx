@@ -13,7 +13,14 @@ const typeDefs = gql`
   type Query {
     getPaper(id: String!): Paper
     currentUser: CurrentUser
-    searchPapers: SearchPapersResult
+    searchPapers(
+      query: String!
+      sort: String!
+      filter: String!
+      page: Int
+      enableDetectingYear: Boolean
+      weightedSearchType: String
+    ): SearchPapersResult
   }
 `;
 

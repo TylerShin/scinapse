@@ -14,15 +14,40 @@ const getCurrentUser = () => {
   return axios.get(`${API_URL}auth/login`, { withCredentials: true });
 };
 
+interface SearchPapersParams {
+  query: string;
+  sort: string; // TODO: change it to the limited values e.g. RELEVANCE...
+  filter: string;
+  page: number;
+  enableDetectingYear: boolean;
+  weightedSearchType: 'a' | 'b' | 'c' | 'd';
+}
+const searchPapers = ({ query, sort, filter, page = 0, enableDetectingYear, weightedSearchType }: SearchPapersParams) => {
+  return axios.get(`${API_URL}search`, {
+    params: {
+      q: query,
+      sort,
+      filter,
+      page,
+      yd: enableDetectingYear,
+      wcm: weightedSearchType,
+    },
+  });
+};
+
 const resolvers: Resolvers = {
   Query: {
     getPaper: async (_, { id }, _context, __) => {
       const res = await getPaper(id);
       return res.data;
     },
-    currentUser: async (_, __, ___, ____) => {
+    currentUser: async () => {
       const user = await getCurrentUser();
       return user;
+    },
+    searchPapers: async (_, { query, sort, filter, page = 0, enableDetectingYear, weightedSearchType }, ___, ____) => {
+      const res = await searchPapers({ query, sort, filter, page, enableDetectingYear, weightedSearchType });
+      return res.data.data;
     },
   },
   Mutation: {

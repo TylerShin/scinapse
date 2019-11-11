@@ -8,7 +8,7 @@
 
 export interface LogInWithEmail_logInWithEmail_member {
   __typename: "Member";
-  id: number | null;
+  id: string | null;
   email: string | null;
 }
 
