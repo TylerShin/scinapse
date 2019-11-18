@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start:graphql": "ts-node --project server/tsconfig.json server/apolloServer.ts",
+    "start:graphql": "nodemon",
     "download:schema": "apollo schema:download --endpoint=http://localhost:4000",
     "generate:graphql_types": "apollo client:codegen --target=typescript --localSchemaFile=schema.json types",
     "start": "next start",
@@ -71,6 +71,7 @@
     "husky": "^3.0.9",
     "jest": "^24.9.0",
     "lint-staged": "^9.4.2",
+    "nodemon": "^1.19.4",
     "prettier": "^1.19.1",
     "serverless": "^1.56.1",
     "serverless-next.js": "^1.4.3",

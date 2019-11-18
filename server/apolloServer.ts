@@ -6,5 +6,5 @@ const schema = makeExecutableSchema({ typeDefs, resolvers });
 const server = new ApolloServer({ schema });
 
 server.listen().then(({}) => {
-  console.log(`🚀 Server ready`);
+  console.log(`🚀 Server is ready as 0.0.0.0:4000`);
 });
