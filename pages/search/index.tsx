@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import { NextPage } from 'next';
 import { withApollo } from 'helpers/next-apollo';
 import { useQuery } from '@apollo/react-hooks';
+import { SearchPapers } from './types/SearchPapers';
 
 // q: john f 2013
 // sort: RELEVANCE
@@ -14,9 +15,10 @@ import { useQuery } from '@apollo/react-hooks';
 // wcm: a
 
 const SEARCH_PAPERS = gql`
-  query SearchPapers($query: String!, $filter: String!, $page: Int) {
-    searchPapers(query: $query, sort: "relevance", filter: $filter, page: $page, enableDetectingYear: true, weightedSearchType: "c") {
+  query SearchPapers($query: String!, $filter: String, $page: Int) {
+    searchPapers(query: $query, sort: "RELEVANCE", filter: $filter, page: $page, enableDetectingYear: true, weightedSearchType: "c") {
       content {
+        id
         title
       }
     }
@@ -27,7 +29,7 @@ const SearchPage: NextPage = () => {
   const router = useRouter();
   const queryParams = router.query;
 
-  const { data, loading, error } = useQuery(SEARCH_PAPERS, {
+  const { data, loading, error } = useQuery<SearchPapers>(SEARCH_PAPERS, {
     variables: {
       query: queryParams.query,
       filter: queryParams.filter,
@@ -35,12 +37,12 @@ const SearchPage: NextPage = () => {
     },
   });
 
-  console.log(data, '=== data');
-
   return (
     <Layout>
-      search page
-      <div>list</div>
+      {loading && <div>is loading...</div>}
+      {data?.searchPapers?.content?.map(paper => (
+        <div key={paper?.id}>{paper?.title}</div>
+      ))}
     </Layout>
   );
 };

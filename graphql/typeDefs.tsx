@@ -16,7 +16,7 @@ const typeDefs = gql`
     searchPapers(
       query: String!
       sort: String!
-      filter: String!
+      filter: String
       page: Int
       enableDetectingYear: Boolean
       weightedSearchType: String

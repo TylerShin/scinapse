@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import { Formik, Form, Field } from 'formik';
 import FormikInput from 'components/formikInput/formikInput';
 import SearchIcon from 'atoms/icons/search.svg';
+import { useRouter } from 'next/router';
 
 interface FormValues {
   query: string;
@@ -10,23 +11,28 @@ interface FormValues {
 
 interface Props {
   initialValue: string;
-  onSubmit: (values: FormValues) => void;
 }
 
 const SearchIconBox = styled.i`
   cursor: pointer;
 `;
 
-const SearchBox: FC<Props> = ({ initialValue, onSubmit }) => {
+const SearchBox: FC<Props> = ({ initialValue }) => {
+  const router = useRouter();
   return (
     <Formik<FormValues>
       initialValues={{ query: initialValue }}
       onSubmit={values => {
-        onSubmit(values);
+        router.push({
+          pathname: '/search',
+          query: {
+            query: values.query,
+          },
+        });
       }}
     >
       {({ submitForm }) => (
-        <Form style={{ width: '100%' }}>
+        <Form style={{ width: '100%' }} autoComplete="off">
           <Field
             name="query"
             component={FormikInput}

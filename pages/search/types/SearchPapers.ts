@@ -8,6 +8,7 @@
 
 export interface SearchPapers_searchPapers_content {
   __typename: "Paper";
+  id: string;
   title: string | null;
 }
 
@@ -22,6 +23,6 @@ export interface SearchPapers {
 
 export interface SearchPapersVariables {
   query: string;
-  filter: string;
+  filter?: string | null;
   page?: number | null;
 }

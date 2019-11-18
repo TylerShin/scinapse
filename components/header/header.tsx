@@ -4,8 +4,9 @@ import { useQuery } from '@apollo/react-hooks';
 import { CURRENT_USER } from 'graphql-client/user';
 import Logo from 'atoms/icons/scinapse-logo.svg';
 import { GetCurrentUser } from 'components/authForm/types/GetCurrentUser';
-import { InputField } from '@pluto_network/pluto-design-elements';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
+import SearchBox from 'components/searchBox/searchBox';
 
 const Nav = styled.nav`
   width: 100%;
@@ -20,24 +21,27 @@ const Nav = styled.nav`
   border-bottom: 1px solid #f1f3f6;
 `;
 
-const SearchBox = styled.div`
+const SearchBoxWrapper = styled.div`
   flex: 1 0 auto;
 `;
 
 const Header: FC = () => {
   const router = useRouter();
   const onHomePage = router.pathname === '/';
-  const { data: user } = useQuery<GetCurrentUser>(CURRENT_USER, { fetchPolicy: 'network-only' });
+  const { data: user } = useQuery<GetCurrentUser>(CURRENT_USER);
+  const searchQuery = (router.query.query as string) || '';
 
   return (
     <Nav>
-      <div>
-        <Logo style={{ width: 122, height: 32 }} />
-      </div>
+      <Link href="/">
+        <a>
+          <Logo style={{ width: 122, height: 32 }} />
+        </a>
+      </Link>
       {!onHomePage && (
-        <SearchBox>
-          <InputField />
-        </SearchBox>
+        <SearchBoxWrapper>
+          <SearchBox initialValue={searchQuery} />
+        </SearchBoxWrapper>
       )}
       <div>{user?.currentUser?.member?.email || 'not logged in'}</div>
     </Nav>
