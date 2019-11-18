@@ -5,6 +5,7 @@ import { withApollo } from '../helpers/next-apollo';
 import Logo from 'atoms/icons/scinapse-home-logo.svg';
 import Layout from 'components/layout/layout';
 import SearchBox from 'components/searchBox/searchBox';
+import SelectableInput from 'components/selectableInput/selectableInput';
 
 const Container = styled.div`
   display: flex;
@@ -47,6 +48,13 @@ const Home: NextPage<{}, null> = () => {
           <Title>Academic Search Engine</Title>
           <SearchBox initialValue="" />
           <GSContent>We’re better than Google Scholar. We mean it.</GSContent>
+          <SelectableInput
+            initialValue=""
+            availableList={[]}
+            onSubmitForm={(value: string) => {
+              console.log(value);
+            }}
+          />
         </ContentWrapper>
       </Container>
     </Layout>
