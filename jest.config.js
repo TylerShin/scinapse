@@ -4,5 +4,8 @@ module.exports = {
   verbose: true,
   rootDir: '',
   moduleFileExtensions: ['js', 'ts', 'tsx'],
+  moduleNameMapper: {
+    '^lodash-es$': '<rootDir>/node_modules/lodash/index.js',
+  },
   testRegex: '__tests__/.*_spec.tsx$',
 };

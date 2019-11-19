@@ -1,6 +1,7 @@
 import { Resolvers } from 'apollo-boost';
-import { searchPapers, getPaper } from './papers';
+import { searchPapers, getPaper } from './paper';
 import { getCurrentUser, logInWithEmail } from './user';
+import { getAutoCompleteSearchKeyword } from './complete';
 
 const resolvers: Resolvers = {
   Query: {
@@ -14,6 +15,10 @@ const resolvers: Resolvers = {
     },
     searchPapers: async (_, { query, sort, filter, page = 0, enableDetectingYear, weightedSearchType }, ___, ____) => {
       const res = await searchPapers({ query, sort, filter, page, enableDetectingYear, weightedSearchType });
+      return res.data.data;
+    },
+    getAutoCompleteSearchKeyword: async (_, { query }) => {
+      const res = await getAutoCompleteSearchKeyword({ query });
       return res.data.data;
     },
   },

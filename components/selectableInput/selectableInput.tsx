@@ -1,5 +1,6 @@
 import React, { FC, ChangeEvent } from 'react';
 import { Formik, Form, Field } from 'formik';
+import { throttle } from 'lodash-es';
 import { InputProps } from '@pluto_network/pluto-design-elements';
 import FormikInput from 'components/formikInput/formikInput';
 
