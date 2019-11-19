@@ -1,6 +1,6 @@
 {
   "watch": ["server", "graphql"],
-  "ext": "ts",
+  "ext": "ts, tsx",
   "ignore": ["src/**"],
   "exec": "ts-node --project server/tsconfig.json ./server/apolloServer.ts"
 }
