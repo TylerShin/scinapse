@@ -7,13 +7,6 @@ import { withApollo } from 'helpers/next-apollo';
 import { useQuery } from '@apollo/react-hooks';
 import { SearchPapers } from './types/SearchPapers';
 
-// q: john f 2013
-// sort: RELEVANCE
-// filter: year=:,fos=,journal=
-// page: 0
-// yd: true
-// wcm: a
-
 const SEARCH_PAPERS = gql`
   query SearchPapers($query: String!, $filter: String, $page: Int) {
     searchPapers(query: $query, sort: "RELEVANCE", filter: $filter, page: $page, enableDetectingYear: true, weightedSearchType: "c") {

@@ -23,7 +23,7 @@ const typeDefs = gql`
       enableDetectingYear: Boolean
       weightedSearchType: String
     ): SearchPapersResult
-    getAutoCompleteSearchKeyword(query: String): [SearchKeyword]!
+    getAutoCompleteSearchKeyword(query: String): [SearchKeyword!]!
   }
 `;
 

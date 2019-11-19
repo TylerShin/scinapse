@@ -1,13 +1,14 @@
-import React, { FC, ChangeEvent } from 'react';
+import React, { FC, ChangeEvent, useState, useRef } from 'react';
 import { Formik, Form, Field } from 'formik';
-import { throttle } from 'lodash-es';
 import { InputProps } from '@pluto_network/pluto-design-elements';
 import FormikInput from 'components/formikInput/formikInput';
+import useOutsideClick from 'hooks/useOutsideClick';
 
 interface Props {
   initialValue: string;
   onSubmitForm: (value: string) => void | Promise<void>;
-  availableList: string[];
+  onChangeField: (value: string) => void | Promise<void>;
+  availableList: JSX.Element[];
 }
 
 interface FormValues {
@@ -15,17 +16,21 @@ interface FormValues {
 }
 
 const SelectableInput: FC<Props & InputProps> = props => {
-  const { onSubmitForm, initialValue, availableList, children, ...inputProps } = props;
+  const { onSubmitForm, onChangeField, initialValue, availableList, children, ...inputProps } = props;
+  const [isOpen, setIsOpen] = useState(false);
+  const wrapper = useRef<HTMLDivElement | null>(null);
+
+  useOutsideClick(wrapper, () => isOpen && setIsOpen(false));
 
   return (
-    <div>
+    <div ref={wrapper} onClick={e => e.target}>
       <Formik<FormValues>
         initialValues={{ text: initialValue }}
         onSubmit={values => {
           onSubmitForm(values.text);
         }}
       >
-        {({ handleChange }) => (
+        {({ handleChange, values }) => (
           <Form autoComplete="off">
             <Field
               name="text"
@@ -33,18 +38,19 @@ const SelectableInput: FC<Props & InputProps> = props => {
               {...inputProps}
               onChange={(e: ChangeEvent<HTMLInputElement>) => {
                 const { value } = e.target;
-                console.log(value);
                 handleChange(e);
+                onChangeField(value);
+                if (value.length > 0) setIsOpen(true);
+              }}
+              onFocus={() => {
+                onChangeField(values.text);
+                setIsOpen(true);
               }}
             />
           </Form>
         )}
       </Formik>
-      <ul>
-        {availableList.map((word, i) => (
-          <li key={i}>{word}</li>
-        ))}
-      </ul>
+      <ul onClick={() => setIsOpen(false)}>{isOpen && availableList}</ul>
     </div>
   );
 };

@@ -18,6 +18,7 @@ const resolvers: Resolvers = {
       return res.data.data;
     },
     getAutoCompleteSearchKeyword: async (_, { query }) => {
+      if (!query) return [];
       const res = await getAutoCompleteSearchKeyword({ query });
       return res.data.data;
     },
