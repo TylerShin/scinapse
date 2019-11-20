@@ -5,10 +5,7 @@ import { withApollo } from '../helpers/next-apollo';
 import Logo from 'atoms/icons/scinapse-home-logo.svg';
 import Layout from 'components/layout/layout';
 import SearchBox from 'components/searchBox/searchBox';
-import SelectableInput from 'components/selectableInput/selectableInput';
 import { useLazyQuery } from '@apollo/react-hooks';
-import { debounce } from 'lodash';
-import { gql } from 'apollo-boost';
 import { getAutoCompleteSearchKeyword } from './types/getAutoCompleteSearchKeyword';
 
 const Container = styled.div`
@@ -42,27 +39,7 @@ const MainLogo = styled(Logo)`
   height: 114px;
 `;
 
-const GET_AUTO_COMPLETE_KEYWORDS = gql`
-  query getAutoCompleteSearchKeyword($query: String) {
-    getAutoCompleteSearchKeyword(query: $query) {
-      keyword
-    }
-  }
-`;
-
-const debouncedGetAutoCompleteKeyword = debounce((fetchFunc: Function) => {
-  fetchFunc();
-}, 200);
-
 const Home: NextPage<{}, null> = () => {
-  const [getAutoCompleteKeyword, { loading, data: autoCompleteResult }] = useLazyQuery<getAutoCompleteSearchKeyword>(
-    GET_AUTO_COMPLETE_KEYWORDS
-  );
-
-  console.log('loading := ', loading);
-
-  const list = autoCompleteResult?.getAutoCompleteSearchKeyword || [];
-
   return (
     <Layout>
       <h1 style={{ display: 'none' }}>Scinapse | Academic search engine for paper</h1>
@@ -72,27 +49,6 @@ const Home: NextPage<{}, null> = () => {
           <Title>Academic Search Engine</Title>
           <SearchBox initialValue="" />
           <GSContent>We’re better than Google Scholar. We mean it.</GSContent>
-          <SelectableInput
-            initialValue=""
-            availableList={list.map((word, i) => (
-              <li
-                onClick={() => {
-                  console.log('adsfdjkfljaslkdfjklajsfkl');
-                }}
-                key={i}
-              >
-                {word.keyword}
-              </li>
-            ))}
-            onSubmitForm={(value: string) => {
-              console.log(value);
-            }}
-            onChangeField={(value: string) => {
-              debouncedGetAutoCompleteKeyword(() => {
-                getAutoCompleteKeyword({ variables: { query: value } });
-              });
-            }}
-          />
         </ContentWrapper>
       </Container>
     </Layout>

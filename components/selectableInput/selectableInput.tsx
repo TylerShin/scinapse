@@ -30,7 +30,7 @@ const SelectableInput: FC<Props & InputProps> = props => {
           onSubmitForm(values.text);
         }}
       >
-        {({ handleChange, values }) => (
+        {({ handleChange, values, handleSubmit }) => (
           <Form autoComplete="off">
             <Field
               name="text"
